@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue - ToDo</title>
+</head>
+<body>
+    <h1>ToDo List Management App</h1>
+    
+    <div id='app'>
+
+        <h4>Add new ToDo</h4>
+        <input v-model='newTodo.text'>
+        <p>{{newTodo.text}}</p>
+
+        <button v-on:click='addTodo(newTodo)'>Add New</button>
+
+        <ol>
+            <li v-for='todo in todos'>
+                <span v-if='clicked === !true'>{{ todo.text }}</span>
+                <input v-if='clicked === true' v-model="todo.text"
+                placeholder="todo.text">
+                <button v-if='clicked === !true' 
+                    v-on:click='changeTodo(todo)'>Change</button>
+                <button v-if='clicked === true'
+                    v-on:click='finishTodo(todo)'>Done</button>
+                <button v-on:click='deleteTodo(todo)'>Delete</button>
+                
+            </li>
+        </ol>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="vue.js"></script>
+</body>
+</html>
+
