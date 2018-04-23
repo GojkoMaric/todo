@@ -5,35 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue - ToDo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
-<body>
-    <h1>ToDo List Management App</h1>
+<body class="p-3 mb-2 bg-light">
+    <h1 class="p-3 mb-2 bg-dark text-white">ToDo List Management App</h1>
     
-    <div id='app'>
+    <div id='app' class="container">
 
         <h4>Add new ToDo</h4>
+
         <input v-model='newTodo.text'>
         <p>{{newTodo.text}}</p>
 
-        <button v-on:click='addTodo(newTodo)'>Add New</button>
+            <select v-model="newTodo.priority" class="selectpicker">
+                <option>Low</option>
+                <option>Normal</option>
+                <option>High</option>
+            </select>
 
-        <ol>
-            <li v-for='todo in todos'>
-                <span v-if='clicked === !true'>{{ todo.text }}</span>
-                <input v-if='clicked === true' v-model="todo.text"
-                placeholder="todo.text">
-                <button v-if='clicked === !true' 
-                    v-on:click='changeTodo(todo)'>Change</button>
-                <button v-if='clicked === true'
-                    v-on:click='finishTodo(todo)'>Done</button>
-                <button v-on:click='deleteTodo(todo)'>Delete</button>
-                
-            </li>
+        <button v-on:click='postTodo()' class="btn">Add New</button>
+
+        <ol class="list-group">
+            <todo-item  v-for="todo in todos" 
+                        :key="todo.id" 
+                        :todo="todo"
+                        class="list-group-item">
+            </todo-item>
         </ol>
 
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script src="vue.js"></script>
 </body>
 </html>
